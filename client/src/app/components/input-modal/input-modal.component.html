@@ -1,12 +1,28 @@
-<p>input-modal works!</p>
-<ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-      </button>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Please enter your name</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="userForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" formControlName="name"
+        [ngClass]="{ 'is-invalid': 
+        (userForm.invalid && 
+        userForm.get('name')?.touched && 
+        userForm.get('name')?.dirty) }"
+      >
+      <div class="invalid-feedback" *ngIf="userForm.invalid">
+        <p *ngIf="userForm.get('name')?.hasError('required')">Name is required</p>
+        <p *ngIf="userForm.get('name')?.hasError('maxlength')">Name should be not longer than 50 symbols</p>
+        <p *ngIf="!userForm.get('name')?.hasError('nameFalseSymbols')">Name should contain numbers and symbols</p>
+      </div>
     </div>
-    <div class="modal-body">
-      This is a modal.
-    </div>
-  </ng-template>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-warning" (click)="bsModalRef.hide()" [disabled]="userForm.invalid">Checkin</button>
+  <button type="button" class="btn btn-light" (click)="bsModalRef.hide()">Cancel</button>
+</div>

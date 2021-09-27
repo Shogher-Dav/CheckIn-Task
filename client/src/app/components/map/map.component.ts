@@ -11,6 +11,7 @@ import { InputModalComponent } from '../input-modal/input-modal.component';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+  bsModalRef?: BsModalRef;
 
 
   constructor(private modalService: BsModalService) { }
@@ -60,8 +61,6 @@ export class MapComponent implements OnInit {
   openModal() {
     this.modalService.show(InputModalComponent);
   }
-
-
 
 
 
