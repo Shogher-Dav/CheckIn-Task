@@ -9,7 +9,7 @@ router.route('/checkins')
     .get(getCheckinList)
     .post(addUserLocation);
 
-router.route('/checkins/:id')
+router.route('/checkins/:name')
     .put(updateCurrentUserLocation);
 
 router.route('/checkins/all')

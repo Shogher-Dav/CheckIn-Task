@@ -121,6 +121,7 @@ exports.addRandomUserLocations = async (req: Request, res: Response, next: NextF
             success: true,
             data: userData
         });
+
     } catch (err: any) {
         console.error(err);
         if (err.code === 11000) {
@@ -141,13 +142,16 @@ exports.updateCurrentUserLocation = async (req: Request, res: Response, next: Ne
 
         const userLocation = req.body
         //  get id from request
-        const id = req.params.id;
-        console.log(id)
-        const updateLocation = await CheckIns.updateOne({ id: id }, userLocation);
+        const name = req.params.name;
+
+        // location type must be added
+        userLocation.location.type = 'Point';
+
+        const updateLocation = await CheckIns.updateOne({ name: name }, userLocation);
 
         return res.status(204).json({
             success: true,
-            data: updateLocation
+            data: userLocation
         });
 
     } catch (err) {

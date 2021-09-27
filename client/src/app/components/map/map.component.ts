@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Loader } from '@googlemaps/js-api-loader';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { CheckinService } from 'src/app/core/services/checkin.service';
 import { environment } from 'src/environments/environment';
 import { InputModalComponent } from '../input-modal/input-modal.component';
 
@@ -14,7 +15,9 @@ export class MapComponent implements OnInit {
   bsModalRef?: BsModalRef;
 
 
-  constructor(private modalService: BsModalService) { }
+  constructor(
+    private modalService: BsModalService,
+    private checkinService: CheckinService) { }
 
   ngOnInit(): void {
     this.getCurrentLocation();
@@ -54,6 +57,7 @@ export class MapComponent implements OnInit {
         lat: coords.latitude, lng: coords.longitude
       };
       this.initMap(latLong);
+      this.checkinService.coordinates = latLong;
     });
   }
 
