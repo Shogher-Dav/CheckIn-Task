@@ -5,7 +5,7 @@ const uuid = require('uuid');
 
 
 
-// @desc Get all check-ins
+// @desc Get only near check-ins by the current user
 // @route GET /api/checkins
 exports.getCheckinList = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -28,7 +28,7 @@ exports.getCheckinList = async (req: Request, res: Response, next: NextFunction)
                     distanceMultiplier: 0.001,
                 }
             },
-            { $sort: { 'createdAt': -1 } }
+            { $sort: { 'createdAt': -1 } },
         ]);
         return res.status(200).json({
             success: true,

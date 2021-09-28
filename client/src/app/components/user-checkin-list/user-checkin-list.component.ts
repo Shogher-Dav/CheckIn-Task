@@ -10,27 +10,16 @@ import { CheckinService } from 'src/app/core/services/checkin.service';
   templateUrl: './user-checkin-list.component.html',
   styleUrls: ['./user-checkin-list.component.scss']
 })
-export class UserCheckinListComponent implements OnInit, OnDestroy {
+export class UserCheckinListComponent implements OnInit {
 
-  nearCheckins: any;
-  private unsubscribe$ = new Subject<void>();
-
+  nearCheckins$: any;
 
   constructor(private checkinService: CheckinService) { }
 
 
   ngOnInit(): void {
-    this.checkinService.getNearCheckins()
-      .pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(res => {
-        this.nearCheckins = res.data;
-      });
+    this.checkinService.getNearCheckins();
+    this.nearCheckins$ = this.checkinService.nearCheckinList$;
   }
 
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 }

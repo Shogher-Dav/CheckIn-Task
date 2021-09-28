@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICheckin } from '../interfaces/ICheckin';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const NAME = 'name';
 
@@ -11,7 +11,8 @@ const NAME = 'name';
 })
 export class CheckinService {
 
-  private _coordinates: any
+  private _coordinates: any;
+  nearCheckinList$: BehaviorSubject<any> = new BehaviorSubject(null);
 
 
   get coordinates(): any {
@@ -42,8 +43,10 @@ export class CheckinService {
   }
 
 
-  getNearCheckins(): Observable<any> {
-    return this.httpClient.get(`api/checkins`);
+  getNearCheckins(): any {
+    return this.httpClient.get(`api/checkins`).subscribe((res: any )=> {
+      this.nearCheckinList$.next(res.data);
+    });
   }
 
 

@@ -2,7 +2,7 @@
 
   <div class="title text-center">Recent check-ins near by</div>
 
-  <div *ngFor="let user of nearCheckins" class="checkin-list">
+  <div *ngFor="let user of nearCheckins$ | async" class="checkin-list">
     <div class="checkin-list-column d-flex  align-items-center">
       <div class="col-4">{{user.name}}</div>
       <div class="col-4">{{user.dist.calculated | number}}km </div>

@@ -47,7 +47,7 @@ export class InputModalComponent implements OnInit, OnDestroy {
     if (this.checkinService.getNameLocalStr()) {
       this.userForm.get('name')?.setValue(this.checkinService.getNameLocalStr());
     }
-  
+
   }
 
   checkIn() {
@@ -66,7 +66,7 @@ export class InputModalComponent implements OnInit, OnDestroy {
       this.checkinService.updateCheckIn(userInfo, userUniqName)
         .pipe(
           takeUntil(this.unsubscribe$)
-        ).subscribe(()=>{
+        ).subscribe(() => {
           this.checkinService.saveNameLocalStr(nameObj.name);
         });
 
