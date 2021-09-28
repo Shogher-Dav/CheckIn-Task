@@ -13,6 +13,7 @@ import { CheckinService } from 'src/app/core/services/checkin.service';
 export class UserCheckinListComponent implements OnInit {
 
   nearCheckins$: any;
+  randomUsersCheckins = [];
 
   constructor(private checkinService: CheckinService) { }
 
@@ -21,5 +22,6 @@ export class UserCheckinListComponent implements OnInit {
     this.checkinService.getNearCheckins();
     this.nearCheckins$ = this.checkinService.nearCheckinList$;
   }
+
 
 }

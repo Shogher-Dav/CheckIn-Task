@@ -44,10 +44,13 @@ export class CheckinService {
 
 
   getNearCheckins(): any {
-    return this.httpClient.get(`api/checkins`).subscribe((res: any )=> {
-      this.nearCheckinList$.next(res.data);
-    });
-  }
+    const currentUserName = this.getNameLocalStr();
+    if (currentUserName) {
+      return this.httpClient.get(`api/checkins/${currentUserName}`).subscribe((res: any) => {
+        this.nearCheckinList$.next(res.data);
+      });
+    }
 
+  }
 
 }

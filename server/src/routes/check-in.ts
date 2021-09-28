@@ -7,15 +7,12 @@ const { addRandomUserLocations } = require('../contollers/check-in');
 const { getAllCheckins } = require('../contollers/check-in');
 
 router.route('/checkins')
-    .get(getCheckinList)
     .post(addUserLocation);
 
 router.route('/checkins/:name')
+    .get(getCheckinList)
     .put(updateCurrentUserLocation);
 
-router.route('/checkins/all')
-    .post(addRandomUserLocations)
-    .get(getAllCheckins);
 
 
 module.exports = router;

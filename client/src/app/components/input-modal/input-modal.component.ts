@@ -68,6 +68,7 @@ export class InputModalComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         ).subscribe(() => {
           this.checkinService.saveNameLocalStr(this.userForm.get('name')?.value);
+          this.checkinService.getNearCheckins();
         });
 
     } else {
@@ -77,6 +78,7 @@ export class InputModalComponent implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
         ).subscribe(() => {
           this.checkinService.saveNameLocalStr(this.userForm.get('name')?.value);
+          this.checkinService.getNearCheckins();
         });
     }
     this.bsModalRef.hide();
