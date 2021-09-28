@@ -69,8 +69,25 @@ exports.addUserLocation = async (req: Request, res: Response, next: NextFunction
     }
 }
 
-// @desc  Add a location
-// @route POST /api/checkins
+// @desc  get all users checkin data
+// @route POST /api/checkins/all
+exports.getAllCheckins =  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userCheckinData = await CheckIns.find();
+        return res.status(201).json({
+            success: true,
+            data: userCheckinData
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+        
+    }
+}
+
+// @desc  add randoum user checkins data
+// @route POST /api/checkins/all
 exports.addRandomUserLocations = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const data: any = [
@@ -143,7 +160,7 @@ exports.updateCurrentUserLocation = async (req: Request, res: Response, next: Ne
         const userLocation = req.body
         //  get id from request
         const name = req.params.name;
-
+ console.log(name);
         // location type must be added
         userLocation.location.type = 'Point';
 

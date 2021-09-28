@@ -58,24 +58,25 @@ export class InputModalComponent implements OnInit, OnDestroy {
         coordinates: Object.values(this.checkinService.coordinates)
       }
     };
-    const userInfo = Object.assign({}, nameObj, userLocation);
+    const userInfo = Object.assign({}, userLocation, nameObj);
     const userUniqName = this.checkinService.getNameLocalStr();
 
-
     if (userUniqName) {
+      // update userinfo if user checkin not for the first time
       this.checkinService.updateCheckIn(userInfo, userUniqName)
         .pipe(
           takeUntil(this.unsubscribe$)
         ).subscribe(() => {
-          this.checkinService.saveNameLocalStr(nameObj.name);
+          this.checkinService.saveNameLocalStr(this.userForm.get('name')?.value);
         });
 
     } else {
+      // save user when first time checkin
       this.checkinService.checkInUserCurrentLocation(userInfo)
         .pipe(
           takeUntil(this.unsubscribe$)
         ).subscribe(() => {
-          this.checkinService.saveNameLocalStr(nameObj.name);
+          this.checkinService.saveNameLocalStr(this.userForm.get('name')?.value);
         });
     }
     this.bsModalRef.hide();
