@@ -42,4 +42,9 @@ export class CheckinService {
   }
 
 
+  getNearCheckins(): Observable<any> {
+    return this.httpClient.get(`api/checkins`);
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Loader } from '@googlemaps/js-api-loader';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CheckinService } from 'src/app/core/services/checkin.service';
